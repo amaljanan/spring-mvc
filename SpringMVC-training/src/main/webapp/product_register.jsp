@@ -6,13 +6,12 @@
 <meta charset="ISO-8859-1">
 <title>WELCOME</title>
 </head>
-<h1 align="center">WELCOME ${username}</h1>
+<h1 align="center">Product Registarion Page</h1>
 <body>
 
 	<%
-	response.setHeader("Cache-Control", "no-cache, no-store"); 
+	response.setHeader("Cache-Control", "no-cache, no-store");
 	
-
 	response.setHeader("pragma", "no-cache");
 	
 	response.setHeader("Expires", "0");
@@ -23,25 +22,17 @@
 	if(session.getAttribute("username")==null)
 		response.sendRedirect("index.jsp");
 %>
-	<div align="center">Login successfull as ${username}</div>
-	<div align="center">
-		<p>
-			Click <a href="user_registration.jsp"> here </a> to register user.
-		</p>
-		<input type="hidden" name="username" value="${username}">
-	</div>
-	<div align="center">
-		<p>
-			Click <a href="product_register.jsp"> here </a> to register Product.
-			
-		</p>
-		<p>
-			Click <a href="user_registration.jsp"> here </a> to view Products.
-		</p>
-	</div>
+
+	<form align="center" action="product_register" method="post">
+		<input type="text" name="product_name" placeholder="name" required><br>
+		<input type="text" name="price" placeholder="price" required><br>
+		 <input align="center" type="submit"
+			value="Create Product"><br>
+
+	</form>
+
 	<form align="center" action="logout" method="get">
 		<input type="submit" value="Logout" />
 	</form>
-
 </body>
 </html>
