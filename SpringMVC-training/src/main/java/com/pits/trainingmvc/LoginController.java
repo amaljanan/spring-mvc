@@ -57,7 +57,7 @@ public class LoginController {
 
 		else {
 			modelandview.setViewName("index.jsp");
-			modelandview.addObject("errorMessage", "Wrong username or Password!!");
+			modelandview.addObject("errorMessage", "Wrong username or Password!");
 		}
 
 		return modelandview;
