@@ -41,10 +41,12 @@ public class LoginController {
 		
 		ModelAndView modelandview = new ModelAndView();
 		
-		if (loginService.logincheck(username, password).equals("Admin")) {
-			
 			HttpSession session = request.getSession();		
 			session.setAttribute("username", username);
+			
+		if (loginService.logincheck(username, password).equals("Admin")) {
+			
+			
 			
 			modelandview.setViewName("AdminUser.jsp");
 			modelandview.addObject("username", username.split("\\@")[0]);

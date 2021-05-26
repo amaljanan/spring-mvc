@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>WELCOME</title>
+<title>Product Page </title>
 </head>
-<h1 align="center">WELCOME ${username}</h1>
 <body>
-
-	<%
+<%
 	response.setHeader("Cache-Control", "no-cache, no-store"); 
 	
 
@@ -23,25 +22,28 @@
 	if(session.getAttribute("username")==null)
 		response.sendRedirect("index.jsp");
 %>
-	<div align="center">Login successfull as ${username}</div>
-	<div align="center">
-		<p>
-			Click <a href="user_registration.jsp"> here </a> to register user.
-		</p>
-		<input type="hidden" name="username" value="${username}">
-	</div>
-	<div align="center">
-		<p>
-			Click <a href="product_register.jsp"> here </a> to register Product.
+<h2 align = "center" > Product Page</h2>
+<table border="1" align = "center">
 			
-		</p>
-		<p>
-			Click <a href="view_products"> here </a> to view Products.
-		</p>
-	</div>
-	<form align="center" action="logout" method="get">
-		<input type="submit" value="Logout" />
-	</form>
+			<tr>
+				<th>Product_Name</th>
+				<th>Price</th>
+			</tr>
+			
+			<c:forEach items="${plist}" var="product">
+			
+				<tr>
+					<td>${product.product_name}</td>
+					<td>${product.price}</td>
+				</tr>
+				
+			</c:forEach>
+			
+		</table>
 
+
+<form align="center" action="logout">
+    <input type="submit" value="Logout"/>
+</form>
 </body>
 </html>
