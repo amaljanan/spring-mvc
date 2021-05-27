@@ -15,14 +15,7 @@ public class CreateUserDao {
 		String u = "test";
 		String p = "password";
 		String sqlquery;
-		//String admin_name = "";
-
-		/*
-		 * if (user.getRole() == 1) { sqlquery =
-		 * "insert into user(uname,normal_pass,role) values(?,?,?)"; admin_name =
-		 * user.getUser_name() + "@pits.com"; } else { sqlquery =
-		 * "insert into user(uname,normal_pass,role) values(?,?,?)"; }
-		 */
+		
 		sqlquery = "insert into user(uname,normal_pass,role) values(?,?,?)";
 		
 		try {
