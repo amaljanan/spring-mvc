@@ -28,7 +28,7 @@
 		<p>
 			Click <a href="user_registration.jsp"> here </a> to register user.
 		</p>
-		<input type="hidden" name="username" value="${username}">
+		<%-- <input type="hidden" name="username" value="${username}"> --%>
 	</div>
 	<div align="center">
 		<p>

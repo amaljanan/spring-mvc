@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pits.trainingmvc.model.User;
 import com.pits.trainingmvc.service.LoginService;
 
 @Controller
@@ -25,9 +26,17 @@ public class LoginController {
 		
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("username") != null) {
+		String username = (String) session.getAttribute("username");
+		
+		if(username != null && username.contains("@")) {
 			modelandview.setViewName("AdminUser.jsp");
-			modelandview.addObject("username", session.getAttribute("username").toString().split("\\@")[0]);
+			modelandview.addObject("username", username.split("\\@")[0]);
+		}
+		else if(username != null)
+		{
+			modelandview.setViewName("NormalUser.jsp");
+			modelandview.addObject("username", username);
+			
 		}
 		else
 			modelandview.setViewName("index.jsp");
@@ -39,19 +48,25 @@ public class LoginController {
 	public ModelAndView loginCheck(@RequestParam("username") String username,
 			@RequestParam("password") String password,HttpServletRequest request) {
 		
-		ModelAndView modelandview = new ModelAndView();
+			ModelAndView modelandview = new ModelAndView();
 		
 			HttpSession session = request.getSession();		
 			session.setAttribute("username", username);
 			
-		if (loginService.logincheck(username, password).equals("Admin")) {
-			
+			User user = new User();
+			user = loginService.logincheck(username, password);
+		if(user ==null)
+		{
+			modelandview.setViewName("index.jsp");
+			modelandview.addObject("errorMessage", "Wrong username or Password!!!");
+		}
+		else if (user.getRole() ==1) {
 			
 			
 			modelandview.setViewName("AdminUser.jsp");
 			modelandview.addObject("username", username.split("\\@")[0]);
 		} 
-		else if (loginService.logincheck(username, password).equals("Normal")) {
+		else if (user.getRole() ==0) {
 			
 			modelandview.setViewName("NormalUser.jsp");
 			modelandview.addObject("username", username);
@@ -61,6 +76,7 @@ public class LoginController {
 			modelandview.setViewName("index.jsp");
 			modelandview.addObject("errorMessage", "Wrong username or Password!!!");
 		}
+		
 
 		return modelandview;
 	}

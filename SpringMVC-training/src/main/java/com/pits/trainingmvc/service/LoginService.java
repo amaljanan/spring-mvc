@@ -7,40 +7,22 @@ import java.sql.ResultSet;
 import org.springframework.stereotype.Service;
 
 import com.mysql.jdbc.Connection;
+import com.pits.trainingmvc.dao.UserLoginDao;
+import com.pits.trainingmvc.model.User;
 
 @Service
 public class LoginService {
 
-	public String logincheck(String username, String password) {
-		String url = "jdbc:mysql://127.0.0.1:3306/test";
-		String u = "test";
-		String p = "password";
+	public User logincheck(String username, String password) {
 
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = (Connection) DriverManager.getConnection(url, u, p);
-			PreparedStatement pst = con.prepareStatement("select normal_pass,role from user where uname=?");
-			pst.setString(1, username);
-			ResultSet rs = pst.executeQuery();
+		UserLoginDao userLoginDao = new UserLoginDao();
 
-			if (rs.next()) {
+		User user = new User();
 
-				if (rs.getString("role").equals("1") && rs.getString("normal_pass").equals(password))
-					return "Admin";
-				else if(rs.getString("role").equals("0") && rs.getString("normal_pass").equals(password))
-						return "Normal";
-				else
-					 	return "";
+		user.setUser_name(username);
+		user.setPassword(password);
 
-			}
-		}
-
-		catch (Exception e) {
-			System.out.println(e);
-		}
-
-		return "";
+		return userLoginDao.validateUser(user);
 	}
-
 
 }
