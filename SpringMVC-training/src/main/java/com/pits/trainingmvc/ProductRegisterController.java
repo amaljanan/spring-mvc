@@ -19,13 +19,12 @@ public class ProductRegisterController {
 	private ProductRegisterService productRegisterService;
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/product_register")
-	public ModelAndView productRegister(@RequestParam("product_name")String product_name, @RequestParam("price")String price,HttpServletRequest request)
+	public ModelAndView productRegister(@RequestParam("product_name")String product_name, @RequestParam("price")String price,@RequestParam("department")String department, HttpServletRequest request,HttpSession session)
 	{
 		ModelAndView modelandview = new ModelAndView();
 		
-		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("username")!=null && productRegisterService.productRegister(product_name, price))
+		if(session.getAttribute("user")!=null && productRegisterService.productRegister(product_name, price,department))
 		{
 			modelandview.setViewName("product_registered.jsp");
 		}

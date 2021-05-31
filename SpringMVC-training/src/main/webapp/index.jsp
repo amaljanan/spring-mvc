@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" isELIgnored="false" %>
+	<%@page import="com.pits.trainingmvc.model.User"%>
+<!DOCTYPE html>
 <html>
 <body>
 	<h1 align="center">LOGIN PAGE</h1>
@@ -6,7 +10,6 @@
 	<%
 	response.setHeader("Cache-Control", "no-cache, no-store"); 
 	
-
 	response.setHeader("pragma", "no-cache");
 	
 	response.setHeader("Expires", "0");

@@ -19,10 +19,14 @@
 	response.addHeader("Pragma","no-cache"); //HTTP 1.0
 	response.addDateHeader ("Expires", 0); //prevent caching at the proxy server
 	
-	if(session.getAttribute("username")==null)
-		response.sendRedirect("index.jsp");
+ 	if(session.getAttribute("user")==null)
+		response.sendRedirect("index.jsp"); 
 %>
 <h2 align = "center" > Product Page</h2>
+
+	<form align="left" action="login" method="get">
+		<input type="submit" value="Home" />
+	</form>
 <table border="1" align = "center">
 			
 			<tr>

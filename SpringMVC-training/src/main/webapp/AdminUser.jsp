@@ -20,13 +20,13 @@
 	response.addHeader("Pragma","no-cache"); //HTTP 1.0
 	response.addDateHeader ("Expires", 0); //prevent caching at the proxy server
 	
-	if(session.getAttribute("username")==null)
-		response.sendRedirect("index.jsp");
+	 if(session.getAttribute("user")==null)
+		response.sendRedirect("index.jsp"); 
 %>
 	<div align="center">Login successfull as ${username}</div>
 	<div align="center">
 		<p>
-			Click <a href="user_registration.jsp"> here </a> to register user.
+			Click <a href="create_user"> here </a> to register user.
 		</p>
 		<%-- <input type="hidden" name="username" value="${username}"> --%>
 	</div>

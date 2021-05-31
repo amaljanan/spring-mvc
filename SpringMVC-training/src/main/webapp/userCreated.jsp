@@ -9,7 +9,9 @@
 <body>
 
 	User Created
-
+	<form align="left" action="login" method="get">
+		<input type="submit" value="Home" />
+	</form>
 
 	<form method="logout" action="logout">
 		<input type="submit" value="Logout" />

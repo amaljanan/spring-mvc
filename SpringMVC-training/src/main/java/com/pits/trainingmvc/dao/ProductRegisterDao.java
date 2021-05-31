@@ -16,7 +16,7 @@ public class ProductRegisterDao {
 		String p = "password";
 		String sqlquery;
 
-		sqlquery = "insert into product(product_name,price) values(?,?)";
+		sqlquery = "insert into product(product_name,price,department) values(?,?,?)";
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -25,6 +25,7 @@ public class ProductRegisterDao {
 
 			pst.setString(1, product.getProduct_name());
 			pst.setString(2, product.getPrice());
+			pst.setString(3, product.getDepartment());
 
 			pst.executeUpdate();
 			pst.close();

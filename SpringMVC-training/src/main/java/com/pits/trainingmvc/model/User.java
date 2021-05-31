@@ -5,6 +5,14 @@ public class User {
 	private String user_name;
 	private String password;
 	private int role;
+	private String department;
+	
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
 	public String getUser_name() {
 		return user_name;
 	}

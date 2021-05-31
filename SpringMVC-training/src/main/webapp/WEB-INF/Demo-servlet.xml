@@ -15,4 +15,8 @@
 	
 	<ctx:annotation-config></ctx:annotation-config>
 	<ctx:component-scan base-package="com.pits.trainingmvc"></ctx:component-scan>
+	<bean id="productRegisterDao" class="com.pits.trainingmvc.dao.ProductRegisterDao"></bean>
+	<bean id="createUserDao" class="com.pits.trainingmvc.dao.CreateUserDao"></bean>
+	<bean id="userLoginDao" class="com.pits.trainingmvc.dao.UserLoginDao"></bean>
+	<bean id="viewProductDao" class="com.pits.trainingmvc.dao.ViewProductsDao"></bean>
 </beans>

@@ -16,7 +16,7 @@ public class CreateUserDao {
 		String p = "password";
 		String sqlquery;
 		
-		sqlquery = "insert into user(uname,normal_pass,role) values(?,?,?)";
+		sqlquery = "insert into user(uname,normal_pass,role,department) values(?,?,?,?)";
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -26,6 +26,7 @@ public class CreateUserDao {
 				pst.setString(1, user.getUser_name());
 				pst.setString(2, user.getPassword());
 				pst.setInt(3, user.getRole());
+				pst.setString(4, user.getDepartment());
 				
 				if(user.getRole()==1)
 					pst.setString(1, user.getUser_name()+"@pits.com");

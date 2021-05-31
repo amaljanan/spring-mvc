@@ -33,6 +33,7 @@ public class UserLoginDao {
 				resultUser.setUser_name(resultSet.getString("uname"));
 				resultUser.setPassword(resultSet.getString("normal_pass"));
 				resultUser.setRole(resultSet.getInt("role"));
+				resultUser.setDepartment(resultSet.getString("department"));
 				
 				return resultUser;
 			}
