@@ -25,27 +25,29 @@ public class CreateUserController {
 	private CreateUserService userCreateservice;
 	@Autowired
 	private ViewProductsService viewProductsService;
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/create_user")
-	public ModelAndView userCreatePage(HttpServletRequest request,HttpServletResponse response, HttpSession session)
-	{
+	public ModelAndView userCreatePage(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView modelandview = new ModelAndView();
 		List<String> departmentList = viewProductsService.fetchDepartments();
 		modelandview.setViewName("user_registration.jsp");
 		modelandview.addObject("dlist", departmentList);
-		
+
 		return modelandview;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "/create_user")
 	public ModelAndView userCreate(@RequestParam("username") String username, @RequestParam("password") String password,
-			@RequestParam("radios") int role,@RequestParam("departmentN") String departmentN,@RequestParam("departmentA") String departmentA, HttpServletRequest request, HttpServletResponse response,HttpSession session) {
+			@RequestParam("radios") int role, @RequestParam("departmentN") String departmentN,
+			@RequestParam("departmentA") String departmentA, HttpServletRequest request, HttpServletResponse response,
+			HttpSession session) {
 
 		ModelAndView modelandview = new ModelAndView();
-		
-		String department = (role ==1) ? departmentA : departmentN ;
 
-		if (session.getAttribute("user") != null && userCreateservice.userCreate(username, password, role, department)) {
+		String department = (role == 1) ? departmentA : departmentN;
+
+		if (session.getAttribute("user") != null
+				&& userCreateservice.userCreate(username, password, role, department)) {
 			modelandview.setViewName("userCreated.jsp");
 
 		} else {

@@ -13,9 +13,8 @@ import com.pits.trainingmvc.model.Product;
 import com.pits.trainingmvc.model.User;
 
 public class ViewProductsDao {
-	
-	public List<Product> viewProducts(User user)
-	{
+
+	public List<Product> viewProducts(User user) {
 		String url = "jdbc:mysql://127.0.0.1:3306/test";
 		String u = "test";
 		String p = "password";
@@ -24,20 +23,20 @@ public class ViewProductsDao {
 		Product product = null;
 		String sqlquery = null;
 		ResultSet rs = null;
-		
-		if(user.getDepartment().equals("all"))
+
+		if (user.getDepartment().equals("all"))
 			sqlquery = "select * from product";
 		else
 			sqlquery = "select * from product where department=?";
-		
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = (Connection) DriverManager.getConnection(url, u, p);
 			PreparedStatement pst = con.prepareStatement(sqlquery);
-			
-			if(!user.getDepartment().equals("all"))
-			pst.setString(1, user.getDepartment());
-			
+
+			if (!user.getDepartment().equals("all"))
+				pst.setString(1, user.getDepartment());
+
 			rs = pst.executeQuery();
 			productlist = new ArrayList<Product>();
 
@@ -57,44 +56,41 @@ public class ViewProductsDao {
 
 		return productlist;
 	}
-	
-	
-	  public List<String> viewDepartments() { 
-		  
-		  String url = "jdbc:mysql://127.0.0.1:3306/test";
-			String u = "test";
-			String p = "password";
 
-			List<String> departmentlist = null;
-			Product product = null;
-			String sqlquery = null;
-			ResultSet rs = null;
-			
-			
-				sqlquery = "select distinct department from product";
-		
-			
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection con = (Connection) DriverManager.getConnection(url, u, p);
-				PreparedStatement pst = con.prepareStatement(sqlquery);
-				
-				rs = pst.executeQuery();
-				departmentlist = new ArrayList<>();
+	public List<String> viewDepartments() {
 
-				while (rs.next()) {
+		String url = "jdbc:mysql://127.0.0.1:3306/test";
+		String u = "test";
+		String p = "password";
 
-					departmentlist.add(rs.getString("department"));
+		List<String> departmentlist = null;
+		Product product = null;
+		String sqlquery = null;
+		ResultSet rs = null;
 
-				}
+		sqlquery = "select distinct department from product";
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = (Connection) DriverManager.getConnection(url, u, p);
+			PreparedStatement pst = con.prepareStatement(sqlquery);
+
+			rs = pst.executeQuery();
+			departmentlist = new ArrayList<>();
+
+			while (rs.next()) {
+
+				departmentlist.add(rs.getString("department"));
+
 			}
+		}
 
-			catch (Exception e) {
-				System.out.println(e);
-			}
+		catch (Exception e) {
+			System.out.println(e);
+		}
 
-			return departmentlist;
-		  
-	  }
-	 
+		return departmentlist;
+
+	}
+
 }

@@ -25,13 +25,12 @@
 	<form align="left" action="login" method="get">
 		<input type="submit" value="Home" />
 	</form>
-	
+
 	<form align="center" action="product_register" method="post">
 		<input type="text" name="product_name" placeholder="name" required><br>
 		<input type="text" name="price" placeholder="price" required><br>
 		<input type="text" name="department" placeholder="department" required><br>
-		 <input align="center" type="submit"
-			value="Create Product"><br>
+		<input align="center" type="submit" value="Create Product"><br>
 
 	</form>
 

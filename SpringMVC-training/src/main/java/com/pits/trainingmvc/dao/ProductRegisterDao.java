@@ -8,9 +8,8 @@ import com.pits.trainingmvc.model.Product;
 
 public class ProductRegisterDao {
 
-	public boolean productRegister(Product product)
-	{
-		
+	public boolean productRegister(Product product) {
+
 		String url = "jdbc:mysql://127.0.0.1:3306/test";
 		String u = "test";
 		String p = "password";
@@ -35,9 +34,8 @@ public class ProductRegisterDao {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
-		
+
 		return false;
 	}
-	
+
 }

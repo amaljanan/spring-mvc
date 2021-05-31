@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"  isELIgnored="false"%>
+	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +8,7 @@
 </head>
 <h1 align="center">WELCOME ${username}</h1>
 <body>
-<%
+	<%
 	response.setHeader("Cache-Control", "no-cache, no-store"); 
 	
 
@@ -22,18 +22,15 @@
 	if(session.getAttribute("user")==null)
 		response.sendRedirect("index.jsp"); 
 %>
-<div align="center">
-Login successfull
-
-</div>
-<div align="center">
+	<div align="center">Login successfull</div>
+	<div align="center">
 		<p>
 			Click <a href="view_products"> here </a> to view Products.
 		</p>
-</div>
-<form align="center" action="logout">
-    <input type="submit" value="Logout"/>
-</form>
+	</div>
+	<form align="center" action="logout">
+		<input type="submit" value="Logout" />
+	</form>
 
 </body>
 </html>

@@ -14,15 +14,14 @@ import com.pits.trainingmvc.model.Product;
 public class ProductRegisterService {
 	@Autowired
 	private ProductRegisterDao productRegisterDao;
-	
+
 	public boolean productRegister(String product_name, String price, String department) {
-		
-		
-		Product product =  new Product();
-		product.setProduct_name(product_name);	
+
+		Product product = new Product();
+		product.setProduct_name(product_name);
 		product.setPrice(price);
 		product.setDepartment(department);
-			
+
 		return productRegisterDao.productRegister(product);
 	}
 

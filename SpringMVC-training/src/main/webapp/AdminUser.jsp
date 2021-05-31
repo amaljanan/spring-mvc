@@ -33,7 +33,7 @@
 	<div align="center">
 		<p>
 			Click <a href="product_register.jsp"> here </a> to register Product.
-			
+
 		</p>
 		<p>
 			Click <a href="view_products"> here </a> to view Products.

@@ -15,16 +15,15 @@ import com.pits.trainingmvc.model.User;
 public class CreateUserService {
 	@Autowired
 	private CreateUserDao createUserDao;
-	
+
 	public boolean userCreate(String username, String password, int role, String department) {
-		
+
 		User user = new User();
-			user.setUser_name(username);
-			user.setPassword(password);
-			user.setRole(role);
-			user.setDepartment(department);
-			
-		
+		user.setUser_name(username);
+		user.setPassword(password);
+		user.setRole(role);
+		user.setDepartment(department);
+
 		return createUserDao.CreateUser(user);
 	}
 

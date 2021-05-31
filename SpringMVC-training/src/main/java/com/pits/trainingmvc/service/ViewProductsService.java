@@ -23,21 +23,19 @@ import java.util.List;
 public class ViewProductsService {
 	@Autowired
 	private ViewProductsDao viewProductDao;
-	
+
 	public List<Product> viewProducts(User user) {
 
 		List<Product> productlist = viewProductDao.viewProducts(user);
-		
+
 		return productlist;
 	}
-	
-	
-	  public List<String> fetchDepartments() { 
-		 
-		  List<String> productlist = viewProductDao.viewDepartments();
-		  return productlist; 
-		  
-	  }
-	 
+
+	public List<String> fetchDepartments() {
+
+		List<String> productlist = viewProductDao.viewDepartments();
+		return productlist;
+
+	}
 
 }

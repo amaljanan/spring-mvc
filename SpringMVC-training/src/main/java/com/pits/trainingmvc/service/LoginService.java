@@ -15,6 +15,7 @@ import com.pits.trainingmvc.model.User;
 public class LoginService {
 	@Autowired
 	private UserLoginDao userLoginDao;
+
 	public User logincheck(String username, String password) {
 
 		User user = new User();

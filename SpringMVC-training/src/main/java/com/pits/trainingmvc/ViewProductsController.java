@@ -25,30 +25,26 @@ import com.pits.trainingmvc.service.ViewProductsService;
 
 @Controller
 public class ViewProductsController {
-	
+
 	@Autowired
 	ViewProductsService viewProductService;
-	
-	@RequestMapping(method = RequestMethod.GET, value ="/view_products" )
-	public ModelAndView viewProducts(HttpServletRequest request,HttpServletResponse response, HttpSession session) 
-	{
+
+	@RequestMapping(method = RequestMethod.GET, value = "/view_products")
+	public ModelAndView viewProducts(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView modelandview = new ModelAndView();
-		
+
 		User user = (User) session.getAttribute("user");
-		
-		
-		if(user!=null) {
-		List<Product> productlist = viewProductService.viewProducts(user);
-		
-		modelandview.setViewName("view_products.jsp");
-		
-		modelandview.addObject("plist",productlist);
-		}
-		else
-		{
+
+		if (user != null) {
+			List<Product> productlist = viewProductService.viewProducts(user);
+
+			modelandview.setViewName("view_products.jsp");
+
+			modelandview.addObject("plist", productlist);
+		} else {
 			modelandview.setViewName("index.jsp");
 		}
 		return modelandview;
 	}
-	
+
 }
