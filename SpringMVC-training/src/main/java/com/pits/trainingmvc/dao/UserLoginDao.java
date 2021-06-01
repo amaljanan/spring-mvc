@@ -4,11 +4,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import org.apache.log4j.Logger;
+
 import com.mysql.jdbc.Connection;
+import com.pits.trainingmvc.LoginController;
 import com.pits.trainingmvc.model.User;
 
 public class UserLoginDao {
-
+	private Logger logger = Logger.getLogger(LoginController.class);
 	public User validateUser(User user) {
 
 		String url = "jdbc:mysql://127.0.0.1:3306/test";
@@ -32,14 +35,16 @@ public class UserLoginDao {
 				resultUser.setPassword(resultSet.getString("normal_pass"));
 				resultUser.setRole(resultSet.getInt("role"));
 				resultUser.setDepartment(resultSet.getString("department"));
-
+				
+				logger.info("Found user !!");
 				return resultUser;
 			}
 		}
 
 		catch (Exception e) {
-			System.out.println(e);
+			logger.error("Exception occured in finding user"+e);;
 		}
+		logger.warn("No such record exist");
 		return null;
 	}
 

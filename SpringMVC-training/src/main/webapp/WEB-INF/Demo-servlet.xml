@@ -19,4 +19,5 @@
 	<bean id="createUserDao" class="com.pits.trainingmvc.dao.CreateUserDao"></bean>
 	<bean id="userLoginDao" class="com.pits.trainingmvc.dao.UserLoginDao"></bean>
 	<bean id="viewProductDao" class="com.pits.trainingmvc.dao.ViewProductsDao"></bean>
+		<bean id="updateProductDao" class="com.pits.trainingmvc.dao.UpdateProductDao"></bean>
 </beans>

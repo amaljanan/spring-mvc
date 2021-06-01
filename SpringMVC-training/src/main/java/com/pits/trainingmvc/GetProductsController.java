@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,26 +22,26 @@ import com.pits.trainingmvc.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.pits.trainingmvc.service.ViewProductsService;
+import com.pits.trainingmvc.service.ProductService;
 
 @Controller
-public class ViewProductsController {
+public class GetProductsController {
 
 	@Autowired
-	ViewProductsService viewProductService;
-
+	ProductService viewProductService;
+	private Logger logger = Logger.getLogger(LoginController.class);
 	@RequestMapping(method = RequestMethod.GET, value = "/view_products")
-	public ModelAndView viewProducts(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	public ModelAndView getProducts(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView modelandview = new ModelAndView();
 
 		User user = (User) session.getAttribute("user");
-
+		logger.info("Inside get Products Controller");
 		if (user != null) {
-			List<Product> productlist = viewProductService.viewProducts(user);
+			List<Product> productList = viewProductService.getProducts(user);
 
 			modelandview.setViewName("view_products.jsp");
 
-			modelandview.addObject("plist", productlist);
+			modelandview.addObject("productList", productList);
 		} else {
 			modelandview.setViewName("index.jsp");
 		}

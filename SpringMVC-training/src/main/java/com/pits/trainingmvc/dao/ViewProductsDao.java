@@ -6,14 +6,16 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.mysql.jdbc.Connection;
+import com.pits.trainingmvc.LoginController;
 import com.pits.trainingmvc.model.Product;
 import com.pits.trainingmvc.model.User;
 
 public class ViewProductsDao {
-
+	private Logger logger = Logger.getLogger(LoginController.class);
 	public List<Product> viewProducts(User user) {
 		String url = "jdbc:mysql://127.0.0.1:3306/test";
 		String u = "test";
@@ -22,7 +24,7 @@ public class ViewProductsDao {
 		List<Product> productlist = null;
 		Product product = null;
 		String sqlquery = null;
-		ResultSet rs = null;
+		ResultSet resultSet = null;
 
 		if (user.getDepartment().equals("all"))
 			sqlquery = "select * from product";
@@ -37,21 +39,24 @@ public class ViewProductsDao {
 			if (!user.getDepartment().equals("all"))
 				pst.setString(1, user.getDepartment());
 
-			rs = pst.executeQuery();
+			resultSet = pst.executeQuery();
 			productlist = new ArrayList<Product>();
 
-			while (rs.next()) {
+			while (resultSet.next()) {
 
 				product = new Product();
-				product.setProduct_name(rs.getString("product_name"));
-				product.setPrice(rs.getString("price"));
+				product.setProduct_name(resultSet.getString("product_name"));
+				product.setPrice(resultSet.getString("price"));
+				product.setDepartment(resultSet.getString("department"));
+				product.setStocksAvailable(resultSet.getInt("stocksAvailable"));
 				productlist.add(product);
-
+				
+				logger.info("Product details storing in list");
 			}
 		}
 
 		catch (Exception e) {
-			System.out.println(e);
+			logger.error("Exception occured while fetching products !!"+e);;
 		}
 
 		return productlist;
@@ -63,10 +68,9 @@ public class ViewProductsDao {
 		String u = "test";
 		String p = "password";
 
-		List<String> departmentlist = null;
-		Product product = null;
+		List<String> departmentList = null;
 		String sqlquery = null;
-		ResultSet rs = null;
+		ResultSet resultSet = null;
 
 		sqlquery = "select distinct department from product";
 
@@ -75,21 +79,21 @@ public class ViewProductsDao {
 			Connection con = (Connection) DriverManager.getConnection(url, u, p);
 			PreparedStatement pst = con.prepareStatement(sqlquery);
 
-			rs = pst.executeQuery();
-			departmentlist = new ArrayList<>();
+			resultSet = pst.executeQuery();
+			departmentList = new ArrayList<>();
 
-			while (rs.next()) {
+			while (resultSet.next()) {
 
-				departmentlist.add(rs.getString("department"));
+				departmentList.add(resultSet.getString("department"));
 
 			}
 		}
 
 		catch (Exception e) {
-			System.out.println(e);
+			logger.error("Exception occured while fetching departments !! "+e);;
 		}
 
-		return departmentlist;
+		return departmentList;
 
 	}
 

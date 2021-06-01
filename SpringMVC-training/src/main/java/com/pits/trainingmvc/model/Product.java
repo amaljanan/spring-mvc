@@ -2,9 +2,18 @@ package com.pits.trainingmvc.model;
 
 public class Product {
 
-	String product_name;
+	String productName;
 	String price;
 	String department;
+	int stocksAvailable;
+
+	public int getStocksAvailable() {
+		return stocksAvailable;
+	}
+
+	public void setStocksAvailable(int stocksAvailable) {
+		this.stocksAvailable = stocksAvailable;
+	}
 
 	public String getDepartment() {
 		return department;
@@ -15,11 +24,11 @@ public class Product {
 	}
 
 	public String getProduct_name() {
-		return product_name;
+		return productName;
 	}
 
 	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
+		this.productName = product_name;
 	}
 
 	public String getPrice() {

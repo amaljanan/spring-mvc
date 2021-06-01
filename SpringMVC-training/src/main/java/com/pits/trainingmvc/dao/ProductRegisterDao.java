@@ -3,11 +3,14 @@ package com.pits.trainingmvc.dao;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
+import org.apache.log4j.Logger;
+
 import com.mysql.jdbc.Connection;
+import com.pits.trainingmvc.LoginController;
 import com.pits.trainingmvc.model.Product;
 
 public class ProductRegisterDao {
-
+	private Logger logger = Logger.getLogger(LoginController.class);
 	public boolean productRegister(Product product) {
 
 		String url = "jdbc:mysql://127.0.0.1:3306/test";
@@ -28,13 +31,14 @@ public class ProductRegisterDao {
 
 			pst.executeUpdate();
 			pst.close();
-
+			
+			logger.info("Successfully created Product");
 			return true;
 
 		} catch (Exception e) {
-			System.out.println(e);
+			logger.error("Exception occured while creating product ......!"+e);
 		}
-
+		
 		return false;
 	}
 

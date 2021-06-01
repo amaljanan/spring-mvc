@@ -3,11 +3,14 @@ package com.pits.trainingmvc.dao;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
+import org.apache.log4j.Logger;
+
 import com.mysql.jdbc.Connection;
+import com.pits.trainingmvc.LoginController;
 import com.pits.trainingmvc.model.User;
 
 public class CreateUserDao {
-
+	private Logger logger = Logger.getLogger(LoginController.class);
 	public boolean CreateUser(User user) {
 
 		String url = "jdbc:mysql://127.0.0.1:3306/test";
@@ -33,10 +36,14 @@ public class CreateUserDao {
 			pst.executeUpdate();
 			pst.close();
 
+			logger.info("Successfully created user");
 			return true;
 
 		} catch (Exception e) {
-			System.out.println(e);
+			
+			logger.error("Exception occured during creation of user ......!"+e);
+			
+			
 		}
 		return false;
 	}

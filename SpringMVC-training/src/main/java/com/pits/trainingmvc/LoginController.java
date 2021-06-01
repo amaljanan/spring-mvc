@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pits.trainingmvc.model.Product;
 import com.pits.trainingmvc.model.User;
 import com.pits.trainingmvc.service.LoginService;
-import com.pits.trainingmvc.service.ViewProductsService;
+import com.pits.trainingmvc.service.ProductService;
 import java.util.*;
 
 @Controller
@@ -25,7 +25,7 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	@Autowired
-	private ViewProductsService viewProductService;
+	private ProductService viewProductService;
 
 	private Logger logger = Logger.getLogger(LoginController.class);
 

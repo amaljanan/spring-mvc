@@ -12,7 +12,7 @@ import com.pits.trainingmvc.dao.CreateUserDao;
 import com.pits.trainingmvc.model.User;
 
 @Service
-public class CreateUserService {
+public class UserService {
 	@Autowired
 	private CreateUserDao createUserDao;
 
