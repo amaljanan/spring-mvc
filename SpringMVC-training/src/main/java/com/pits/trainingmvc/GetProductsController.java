@@ -30,6 +30,7 @@ public class GetProductsController {
 	@Autowired
 	ProductService viewProductService;
 	private Logger logger = Logger.getLogger(LoginController.class);
+
 	@RequestMapping(method = RequestMethod.GET, value = "/view_products")
 	public ModelAndView getProducts(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView modelandview = new ModelAndView();

@@ -28,7 +28,6 @@ public class CreateUserController {
 	private ProductService viewProductsService;
 	private Logger logger = Logger.getLogger(LoginController.class);
 
-
 	@RequestMapping(method = RequestMethod.GET, value = "/create_user")
 	public ModelAndView userCreatePage(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView modelandview = new ModelAndView();
@@ -42,22 +41,20 @@ public class CreateUserController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "/create_user")
 	public ModelAndView userCreate(@RequestParam("username") String username, @RequestParam("password") String password,
-			@RequestParam("radios") int role, @RequestParam("departmentN") String departmentNormal,
-			@RequestParam("departmentA") String departmentAdmin, HttpServletRequest request, HttpServletResponse response,
-			HttpSession session) {
-		
+			@RequestParam("radios") int role, HttpServletRequest request, HttpServletResponse response,
+			HttpSession session, @RequestParam("departmentList") List<String> departmentList) {
+
 		logger.info("Inside user create controller POST");
 		ModelAndView modelandview = new ModelAndView();
 
-		String department = (role == 1) ? departmentAdmin : departmentNormal;
+		if (role == 1)
+			departmentList = null;
 
-		if (session.getAttribute("user") != null
-				&& userCreateservice.userCreate(username, password, role, department)) {
+		if (userCreateservice.userCreate(username, password, role, departmentList))
 			modelandview.setViewName("userCreated.jsp");
+		else
+			modelandview.setViewName("user_registration.jsp");
 
-		} else {
-			modelandview.setViewName("AdminUser.jsp");
-		}
 		return modelandview;
 
 	}

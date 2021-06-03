@@ -1,5 +1,6 @@
 package com.pits.trainingmvc.dao;
 
+import java.sql.Array;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +17,7 @@ import com.pits.trainingmvc.model.User;
 
 public class ViewProductsDao {
 	private Logger logger = Logger.getLogger(LoginController.class);
+
 	public List<Product> viewProducts(User user) {
 		String url = "jdbc:mysql://127.0.0.1:3306/test";
 		String u = "test";
@@ -25,20 +27,37 @@ public class ViewProductsDao {
 		Product product = null;
 		String sqlquery = null;
 		ResultSet resultSet = null;
+		int i = 0;
 
-		if (user.getDepartment().equals("all"))
+		if (user.getRole() == 1)
 			sqlquery = "select * from product";
-		else
-			sqlquery = "select * from product where department=?";
+		else {
+			sqlquery = "select * from product where department in("; 
+																		
+
+			String temp = "";
+
+			for (int k = 0; k < user.getDepartmentList().size(); k++) {
+				temp += ",?";
+			}
+
+			temp = temp.replaceFirst(",", "");
+			temp += ")";
+			sqlquery = sqlquery + temp + "and stocksAvailable>0";
+		}
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = (Connection) DriverManager.getConnection(url, u, p);
 			PreparedStatement pst = con.prepareStatement(sqlquery);
 
-			if (!user.getDepartment().equals("all"))
-				pst.setString(1, user.getDepartment());
+			if (user.getRole() == 0) { 
 
+				for (int j = 0; j < user.getDepartmentList().size(); j++) {
+					pst.setString(j + 1, user.getDepartmentList().get(j));
+					logger.info(user.getDepartmentList().get(j));
+				}
+			}
 			resultSet = pst.executeQuery();
 			productlist = new ArrayList<Product>();
 
@@ -50,13 +69,14 @@ public class ViewProductsDao {
 				product.setDepartment(resultSet.getString("department"));
 				product.setStocksAvailable(resultSet.getInt("stocksAvailable"));
 				productlist.add(product);
-				
-				logger.info("Product details storing in list");
+				i++;
+				logger.info("Product " + i + " details storing in list");
 			}
 		}
 
 		catch (Exception e) {
-			logger.error("Exception occured while fetching products !!"+e);;
+			logger.error("Exception occured while fetching products !!" + e);
+			;
 		}
 
 		return productlist;
@@ -90,7 +110,8 @@ public class ViewProductsDao {
 		}
 
 		catch (Exception e) {
-			logger.error("Exception occured while fetching departments !! "+e);;
+			logger.error("Exception occured while fetching departments !! " + e);
+			;
 		}
 
 		return departmentList;

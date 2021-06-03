@@ -44,12 +44,13 @@ public class ProductService {
 
 	}
 	
-	public boolean productRegister(String productName, String price, String department) {
+	public boolean productRegister(String productName, String price, String department, int stocksAvailable) {
 
 		Product product = new Product();
 		product.setProduct_name(productName);
 		product.setPrice(price);
 		product.setDepartment(department);
+		product.setStocksAvailable(stocksAvailable);
 
 		return productRegisterDao.productRegister(product);
 	}

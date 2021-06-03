@@ -10,13 +10,13 @@
 	function toggleSelect(id) {
 
 		if (id == '0') {
-			document.getElementById('Admin').style['display'] = 'none';
+			/* document.getElementById('Admin').style['display'] = 'block'; */
 			document.getElementById('Normal').style['display'] = 'block';
 		}
 
 		if (id == '1') {
 			document.getElementById('Normal').style['display'] = 'none';
-			document.getElementById('Admin').style['display'] = 'block';
+			/* document.getElementById('Admin').style['display'] = 'block'; */
 		}
 	}
 </script>
@@ -49,18 +49,23 @@
 			onclick="toggleSelect('1');"> Admin User <BR> <INPUT
 			TYPE="radio" NAME="radios" VALUE='0' onclick="toggleSelect('0');"
 			checked='1'> Normal User <BR>
-		<div align="center">
-			<select name="departmentN" id='Normal'>
+	<!-- 	<div align="center"> -->
+		<%-- 	<select name="departmentN" id='Normal'>
 				<c:forEach items="${dlist}" var="department">
 					<option value="${department}">${department}</option>
 				</c:forEach>
-			</select>
-		</div>
+			</select> --%>
+			<div align="center" id="Normal">
+				<c:forEach items="${dlist}" var="department" >
+					<input type = "checkbox" name="departmentList" value = "${department}" id='Normal' checked>${department}</input>
+				</c:forEach> </br>
+			</div>		
+	<!-- 	</div>
 		<div align="center">
 			<select name="departmentA" id='Admin' style='display: none;'>
 				<option value="all">All</option>
 			</select>
-		</div>
+		</div> -->
 		<input align="center" type="submit" value="Create User"><br>
 
 	</form>

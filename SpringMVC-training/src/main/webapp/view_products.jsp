@@ -1,34 +1,35 @@
 <%@page import="com.pits.trainingmvc.model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" isELIgnored="false" %>
+	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Product Page </title>
+<title>Product Page</title>
 </head>
 <body>
 	<%
-	response.setHeader("Cache-Control", "no-cache, no-store"); 
-	
+	response.setHeader("Cache-Control", "no-cache, no-store");
+
 	response.setHeader("pragma", "no-cache");
-	
+
 	response.setHeader("Expires", "0");
 
-	
- 	if(session.getAttribute("user")==null)
+	if (session.getAttribute("user") == null)
 		response.sendRedirect("index.jsp");
- 	
- 	
-%>
-<%! User user = new User(); %>
-<% user = (User)session.getAttribute("user"); %>
-<%! int role; %>
-<% role = user.getRole(); %>
+	%>
+	<%!User user = new User();%>
+	<%
+	user = (User) session.getAttribute("user");
+	%>
+	<%!int role;%>
+	<%
+	role = user.getRole();
+	%>
 
 
-	<h2 align="center">Product Page </h2>
+	<h2 align="center">Product Page</h2>
 
 	<form align="left" action="login" method="get">
 		<input type="submit" value="Home" />
@@ -41,7 +42,7 @@
 			<th>Qty</th>
 			<th>Department</th>
 		</tr>
-	
+
 		<c:forEach items="${productList}" var="product">
 
 			<tr>
@@ -49,15 +50,22 @@
 				<td>${product.price}</td>
 				<td>${product.stocksAvailable}</td>
 				<td>${product.department}</td>
-				<%  if(role == 1){ %>
+				<%
+				if (role == 1) {
+				%>
 				<td>
 					<form action="update_product">
-						<input type="hidden" name="productName" value="${product.product_name}" />
-						<input type="submit" value="Update"  />
+						<input type="hidden" name="productName"
+							value="${product.product_name}" /> <input type="submit"
+							value="Update" />
 					</form>
 				</td>
-				 <% } else { %>
-				 <% } %>
+				<%
+				} else {
+				%>
+				<%
+				}
+				%>
 			</tr>
 
 		</c:forEach>

@@ -3,6 +3,7 @@ package com.pits.trainingmvc.service;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +17,13 @@ public class UserService {
 	@Autowired
 	private CreateUserDao createUserDao;
 
-	public boolean userCreate(String username, String password, int role, String department) {
+	public boolean userCreate(String username, String password, int role, List<String> departmentList) {
 
 		User user = new User();
 		user.setUser_name(username);
 		user.setPassword(password);
 		user.setRole(role);
-		user.setDepartment(department);
+		user.setDepartmentList(departmentList);
 
 		return createUserDao.CreateUser(user);
 	}

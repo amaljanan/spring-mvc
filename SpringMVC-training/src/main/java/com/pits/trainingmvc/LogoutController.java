@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LogoutController {
 	private Logger logger = Logger.getLogger(LoginController.class);
+
 	@RequestMapping(method = RequestMethod.GET, value = "/logout")
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelandview = new ModelAndView();

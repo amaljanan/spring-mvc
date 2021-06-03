@@ -30,6 +30,7 @@
 		<input type="text" name="product_name" placeholder="name" required><br>
 		<input type="text" name="price" placeholder="price" required><br>
 		<input type="text" name="department" placeholder="department" required><br>
+		<input type="text" name="stocksAvailable" placeholder="stock_available" required><br>
 		<input align="center" type="submit" value="Create Product"><br>
 
 	</form>

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pits.trainingmvc.model.Product;
@@ -21,6 +22,7 @@ import com.pits.trainingmvc.service.ProductService;
 import java.util.*;
 
 @Controller
+@SessionAttributes("user")
 public class LoginController {
 	@Autowired
 	private LoginService loginService;
